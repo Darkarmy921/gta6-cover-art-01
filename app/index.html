@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Sunset Cover Studio — GTA-style cover art maker</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header id="topbar">
+  <div class="brand">
+    <span class="brand-badge" aria-hidden="true"></span>
+    <h1>Neon Sunset <span>Cover Studio</span></h1>
+  </div>
+  <p class="tagline">Turn your photos into GTA-style poster cover art. Offline. Nothing leaves your machine.</p>
+</header>
+
+<main id="studio">
+  <section id="previewPane">
+    <div id="canvasWrap">
+      <canvas id="previewCanvas" width="1080" height="1080" aria-label="Cover preview"></canvas>
+      <p id="previewHint">Click a panel to select it, then drag to move the photo and scroll to zoom.</p>
+    </div>
+    <div id="sizeRow" role="group" aria-label="Export size">
+      <button class="sizeBtn is-active" data-size="1080x1080">1080 × 1080 · Square</button>
+      <button class="sizeBtn" data-size="1080x1350">1080 × 1350 · Portrait</button>
+      <button class="sizeBtn" data-size="1920x1080">1920 × 1080 · Wide</button>
+    </div>
+  </section>
+
+  <aside id="controls">
+    <section class="panel" id="photosPanel">
+      <h2>1 · Photos</h2>
+      <label class="uploadBtn" for="photoInput">+ Add photos from your machine</label>
+      <input type="file" id="photoInput" accept="image/*" multiple hidden>
+      <div id="photoStrip" aria-label="Loaded photos"></div>
+      <p class="help">Photos are read locally with FileReader and never uploaded. Click a photo, then click a panel to place it there. Or try a sample:</p>
+      <div class="sampleRow">
+        <button class="sampleBtn" data-sample="samples/boulevard.png">Sample · Sunset Blvd</button>
+        <button class="sampleBtn" data-sample="samples/pier.png">Sample · Neon Pier</button>
+      </div>
+    </section>
+
+    <section class="panel" id="layoutPanel">
+      <h2>2 · Layout</h2>
+      <div class="btnGrid" id="layoutBtns">
+        <button class="layoutBtn is-active" data-layout="hero">Hero + 2</button>
+        <button class="layoutBtn" data-layout="strip">3-Panel Strip</button>
+        <button class="layoutBtn" data-layout="grid">2 × 2 Grid</button>
+        <button class="layoutBtn" data-layout="full">Full Bleed</button>
+      </div>
+      <label class="field">Selected panel photo
+        <select id="panelPhoto"></select>
+      </label>
+      <label class="field">Zoom
+        <input type="range" id="zoomSlider" min="1" max="3" step="0.01" value="1.2">
+      </label>
+      <div class="btnRow">
+        <button id="fillBtn">Fill panel</button>
+        <button id="resetBtn">Reset crop</button>
+      </div>
+    </section>
+
+    <section class="panel" id="gradePanel">
+      <h2>3 · Colour grade</h2>
+      <div class="btnGrid" id="gradeBtns">
+        <button class="gradeBtn is-active" data-grade="sunset">Vice Sunset</button>
+        <button class="gradeBtn" data-grade="neon">Neon Nights</button>
+        <button class="gradeBtn" data-grade="noir">Noir</button>
+        <button class="gradeBtn" data-grade="gold">Palm Gold</button>
+      </div>
+      <label class="field">Grade strength
+        <input type="range" id="gradeSlider" min="0" max="100" step="1" value="70">
+      </label>
+    </section>
+
+    <section class="panel" id="captionPanel">
+      <h2>4 · Caption</h2>
+      <label class="field">Main title
+        <input type="text" id="titleInput" value="VICE NIGHTS" maxlength="24">
+      </label>
+      <label class="field">Subtitle / tagline
+        <input type="text" id="subtitleInput" value="a Leonida story" maxlength="48">
+      </label>
+      <div class="fieldRow">
+        <label class="field">Title size
+          <input type="range" id="titleSizeSlider" min="40" max="170" step="1" value="110">
+        </label>
+        <label class="field">Title position
+          <select id="titlePos">
+            <option value="bottom">Bottom</option>
+            <option value="top">Top</option>
+            <option value="middle">Middle</option>
+          </select>
+        </label>
+      </div>
+      <div class="field">Title colour
+        <div class="swatches" id="titleColors">
+          <button class="swatch is-active" data-color="#ffffff" style="background:#ffffff" aria-label="White"></button>
+          <button class="swatch" data-color="#ffd166" style="background:#ffd166" aria-label="Gold"></button>
+          <button class="swatch" data-color="#ff5e8a" style="background:#ff5e8a" aria-label="Pink"></button>
+          <button class="swatch" data-color="#59e3ff" style="background:#59e3ff" aria-label="Cyan"></button>
+          <button class="swatch" data-color="#1b1030" style="background:#1b1030" aria-label="Night"></button>
+        </div>
+      </div>
+      <label class="check"><input type="checkbox" id="outlineCheck" checked> Bold outline on title</label>
+      <label class="check"><input type="checkbox" id="badgeCheck" checked> Show sun-and-palm badge</label>
+      <label class="check"><input type="checkbox" id="grainCheck" checked> Film grain + vignette</label>
+    </section>
+
+    <section class="panel" id="exportPanel">
+      <h2>5 · Export</h2>
+      <button id="exportBtn">⬇ Export PNG</button>
+      <p class="help" id="exportStatus">Ready. The PNG downloads straight from your browser.</p>
+    </section>
+  </aside>
+</main>
+
+<footer id="foot">
+  <p>Neon Sunset Cover Studio — an original, offline cover maker. All art, lettering and fonts are original or
+  SIL-OFL licensed; it contains no Rockstar Games logo, artwork or font. Photos never leave your machine.</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
